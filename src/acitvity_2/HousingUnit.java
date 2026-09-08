@@ -1,8 +1,6 @@
 package acitvity_2;
 
 abstract class HousingUnit{
-    protected  String unit;
-    protected double pricePerSQM;
 
     public abstract double TotalUnitPrice(double area);
     public abstract double DownpaymentInPercentage(double downPayment);
