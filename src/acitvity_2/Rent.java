@@ -1,6 +1,6 @@
 package acitvity_2;
 
-class Studio_Type extends HousingUnit{
+class Rent extends HousingUnit{
     enum Unit_Type{
         Studio_Type("Studio Type", 65892.00),
         Two_Bedroom("2 Bedroom", 58807.00),
@@ -22,16 +22,18 @@ class Studio_Type extends HousingUnit{
         }
     }
 
-    Unit_Type U_type;
+
     double area;
     double downPaymentInPercentage, downPayment;
+    private Unit_Type U_type;
 
-    public Studio_Type(double area, double downPaymentInPercentage, double downPayment){
+    public Rent(double area, double downPaymentInPercentage, double downPayment, Unit_Type U_Type){
         //unit = "Studio Type";
         //pricePerSQM = 65892.00;
         this.area = area;
         this.downPaymentInPercentage = downPaymentInPercentage;
         this.downPayment = downPayment;
+        this.U_type = U_Type;
     }
 
     @Override
