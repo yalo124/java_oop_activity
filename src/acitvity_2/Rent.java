@@ -22,14 +22,11 @@ class Rent extends HousingUnit{
         }
     }
 
-
     double area;
     double downPaymentInPercentage, downPayment;
     private Unit_Type U_type;
 
     public Rent(double area, double downPaymentInPercentage, double downPayment, Unit_Type U_Type){
-        //unit = "Studio Type";
-        //pricePerSQM = 65892.00;
         this.area = area;
         this.downPaymentInPercentage = downPaymentInPercentage;
         this.downPayment = downPayment;

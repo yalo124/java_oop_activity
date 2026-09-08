@@ -1,4 +1,5 @@
 package acitvity_2;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Activity_2 {
@@ -7,19 +8,28 @@ public class Activity_2 {
         double Area, DownPayment_A=0, DownPaymentInpercent = 0, discount, Balance_less_discount, Contract_Price;
         int year;
         System.out.print("Input area: ");
-        Area = scan.nextDouble();
 
         Rent.Unit_Type Utype;
-        if(Area >= 28.5 && Area < 52.0){
-            Utype = Rent.Unit_Type.Studio_Type;
-        } else if(Area >= 52.0 && Area < 86.5){
-            Utype = Rent.Unit_Type.Two_Bedroom;
-        } else if (Area >= 86.5){
-            Utype = Rent.Unit_Type.Three_Bedroom;
-        } else{
-            System.out.println("Wrong");
-            return;
-        }
+
+        do{
+            Area = scan.nextDouble();
+            if(Area >= 28.5 && Area < 52.0){
+                Utype = Rent.Unit_Type.Studio_Type;
+            } else if(Area >= 52.0 && Area < 86.5){
+                Utype = Rent.Unit_Type.Two_Bedroom;
+            } else {
+                Utype = Rent.Unit_Type.Three_Bedroom;
+            }
+
+            if(Area < 28.5) {
+                System.out.print("Enter 28.5 SQM and above: ");
+            }
+
+        } while(Area < 28.5);
+
+
+
+
 
         HousingUnit studio_type = new Rent(Area, DownPaymentInpercent, DownPayment_A, Utype);
 
@@ -30,7 +40,12 @@ public class Activity_2 {
         System.out.printf("\n%-20s: %.2f%n","Balance", studio_type.Balance(DownPayment_A));
         DownPaymentInpercent = studio_type.DownpaymentInPercentage(DownPayment_A);
         discount = studio_type.Discount(DownPaymentInpercent);
-        System.out.print("\nYears to pay : ");
+        System.out.print("\nYears to pay :\n");
+        System.out.println("5 years: 4% Interest");
+        System.out.println("10 years: 6% Interest");
+        System.out.println("15 years: 8% Interest");
+        System.out.println("20 years: 10% Interest");
+        System.out.print("Pick : ");
         year = scan.nextByte();
         Balance_less_discount = studio_type.Balance(DownPayment_A)-studio_type.Discount_Amount(discount, DownPayment_A);
         Contract_Price = Balance_less_discount + studio_type.Interest_Amount(Balance_less_discount, year);
@@ -41,28 +56,28 @@ public class Activity_2 {
         System.out.println("------------------------------------------");
         System.out.printf("%-28s | %s%n ", "Unit Type", Utype.getUnit());
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n ","Price Per Square Meter", Utype.getPricePerSQM());
+        System.out.printf("%-28s | ₱%.2f%n ","Price Per Square Meter", Utype.getPricePerSQM());
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n", "Total Unit Price", studio_type.TotalUnitPrice(Area));
+        System.out.printf("%-28s | ₱%.2f%n", "Total Unit Price", studio_type.TotalUnitPrice(Area));
         System.out.println("==========================================");
-        System.out.printf("%-28s | %.2f%n", "Downpayment Amount", DownPayment_A);
+        System.out.printf("%-28s | ₱%.2f%n", "Downpayment Amount", DownPayment_A);
         System.out.println("------------------------------------------");
         System.out.printf("%-28s | %.0f%%%n", "Downpayment in Percentage", studio_type.DownpaymentInPercentage(DownPayment_A) *100);
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n","Balance", studio_type.Balance(DownPayment_A));
+        System.out.printf("%-28s | ₱%.2f%n","Balance", studio_type.Balance(DownPayment_A));
         System.out.println("------------------------------------------");
         System.out.printf("%-28s | %.0f%%%n" ,"Discount", studio_type.Discount(DownPaymentInpercent)*100);
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n","Less: Discount Amount", studio_type.Discount_Amount(discount, DownPayment_A));
+        System.out.printf("%-28s | ₱%.2f%n","Less: Discount Amount", studio_type.Discount_Amount(discount, DownPayment_A));
         System.out.println("==========================================");
         System.out.printf("%-28s | %d%n","Years to Pay", year);
         System.out.println("------------------------------------------");
         System.out.printf("%-28s | %.0f%%%n","Interest", studio_type.Interest(year) * 100);
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n","Interest Amount",  studio_type.Interest_Amount(Balance_less_discount, year));
+        System.out.printf("%-28s | ₱%.2f%n","Interest Amount",  studio_type.Interest_Amount(Balance_less_discount, year));
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n","Contract Price ", Contract_Price);
+        System.out.printf("%-28s | ₱%.2f%n","Contract Price ", Contract_Price);
         System.out.println("------------------------------------------");
-        System.out.printf("%-28s | %.2f%n","Monthly Amortization", Contract_Price / (year * 12));
+        System.out.printf("%-28s | ₱%.2f%n","Monthly Amortization", Contract_Price / (year * 12));
     }
 }
